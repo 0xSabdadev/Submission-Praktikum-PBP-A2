@@ -1,0 +1,91 @@
+<DOCTYPE html>
+<!--
+    Nama Pembuat    : Aprilyanto Setiyawan Siburian
+    NIM             : 24060121120022
+    Lab             : A2 PBP
+    Tanggal         : 5 September 2023
+    Deskripsi       : Membuat form pendataan produk sesuai modul praktikum
+-->
+<html>
+<head>
+    <title>PBP A2 Tugas 1</title>
+    <script src="js/myScript.js"></script>
+</head>
+<body onload="generateCaptcha()">
+    <h1>Form Tambah Data Produk</h1>
+    <form id="formRegistration" method="GET" autocomplete="on" action="" onsubmit="return validateForm()">
+        <table> 
+            <tr>
+                <td>Nama Produk</td>
+                <td><input type="text" id="nama" required minlength="5" maxlength="30"></td>
+            </tr>
+            <tr>
+                <td>Deskripsi</td>
+                <td><textarea id="deskripsi" name="deskripsi" rows="4" cols="50" required minlength="5" maxlength="100"></textarea></td>
+            </tr>
+            <tr>
+                <td><label for="kategori">Kategori</label></td>
+                <td>
+                    <select name="kategori" id="kategori" onchange="getSubkategori()">
+                        <option value="">--Pilih Kategori--</option>
+                        <option value="Baju">Baju</option>
+                        <option value="Elektronik">Elektronik</option>
+                        <option value="AlatTulis">Alat Tulis</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="subkategori">Sub Kategori</label></td>
+                <td>
+                    <select name="subkategori" id="subkategori">
+                        <option>--Pilih Sub Kategori--</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Harga Satuan</td>
+                <td><input type="text" name="harga"></td>
+            </tr>
+            <tr>
+                <td>Grosir</td>
+                <td>
+                    <input type="radio" name="grosir" id="Ya" value="Ya">
+                    <label for="Ya">Ya</label>
+                    <input type="radio" name="grosir" id="Tidak" value="Tidak">
+                    <label for="Tidak">Tidak</label>
+                </td>
+            </tr>
+            <tr>
+                <td>Harga Grosir</td>
+                <td><input type="text" name="hargaGrosir" id="hargaGrosir"></td>
+            </tr>
+            <tr>
+                <td><label for="jasa">Jasa Kirim</label></td>
+                <td>
+                    <input type="checkbox" name="jasa[]" id="JNE" value="JNE">
+                    <label for="JNE">JNE</label><br />
+                    <input type="checkbox" name="jasa[]" id="TIKI" value="TIKI">
+                    <label for="TIKI">TIKI</label><br />
+                    <input type="checkbox" name="jasa[]" id="SiCepat" value="SiCepat">
+                    <label for="SiCepat">SiCepat</label><br />
+                    <input type="checkbox" name="jasa[]" id="Ninja Express" value="Ninja Express">
+                    <label for="Ninja Express">Ninja Express</label><br />
+                    <input type="checkbox" name="jasa[]" id="Wahana" value="Wahana">
+                    <label for="Wahana">Wahana</label><br />
+                </td>
+            </tr>
+            <tr>
+                <td><label for="captcha">Captcha</label></td>
+                <td>
+                    <input type="text" name="captcha_text" size="10" disabled>
+                    <input type="text" name="captcha_input" id="captcha_input" size="10">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><br><input type="submit" name="submit" value="Submit">&nbsp; 
+                <input type="reset" name="reset" value="Reset"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
