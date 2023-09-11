@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Belajar Javascript</title>
+</head>
+
+<body>
+<p class="content">Belajar Javascript</p>
+<p class="content">Belajar Document Object Model</p>
+<h2>Akses elemen menggunakan getElementByClassName</h2>
+<p id="demoClass"></p>
+<h2>Akses elemen menggunakan getElementByClassName</h2>
+<p id="demoSelector"></p>
+
+<script>
+	var x = document.getElementByClassName("content");
+	document.getElementByClassName("demo").innerHTML = "Isi teks : " + x[0].innerHTML + "<br />" + 
+	"isi[1]".innerHTML;
+	
+		var y = document.getquerySelector("content");
+	document.getElementById"demo").innerHTML = "Isi teks : " + y[0].innerHTML + "<br />" + 
+	"isi[1]"y[1].innerHTML;
+</script>
+</body>
+</html>
