@@ -1,0 +1,242 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Validasi Form dengan JavaScript</title>
+    <script>
+        function validateForm() {
+            // Validasi nama produk tidak boleh kosong
+            if (document.forms["formTambahProduk"]["name"].value == "") {
+                alert("Silahkan isi nama produk.");
+                document.forms["formTambahProduk"]["name"].focus();
+                return false;
+            }
+            // Validasi deskripsi tidak boleh kosong
+            if (document.forms["formTambahProduk"]["deskripsi"].value == "") {
+                alert("Silahkan isi deskripsi produk.");
+                document.forms["formTambahProduk"]["deskripsi"].focus();
+                return false;
+            }
+            // Validasi kategori tidak boleh kosong
+            if (document.forms["formTambahProduk"]["kategori"].value == "") {
+                alert("Silahkan pilih kategori produk.");
+                document.forms["formTambahProduk"]["kategori"].focus();
+                return false;
+            }
+            // Validasi sub kategori tidak boleh kosong
+            if (document.forms["formTambahProduk"]["subkategori"].value == "") {
+                alert("Silahkan pilih sub kategori produk.");
+                document.forms["formTambahProduk"]["subkategori"].focus();
+                return false;
+            }
+            // Validasi harga satuan tidak boleh kosong dan harus numerik
+            if (document.forms["formTambahProduk"]["hargasatuan"].value == "") {
+                alert("Silahkan masukkan harga produk.");
+                document.forms["formTambahProduk"]["hargasatuan"].focus();
+                return false;
+            } else if (isNaN(document.forms["formTambahProduk"]["hargasatuan"].value)) {
+                alert("Masukkan harga satuan harus angka atau numerik.");
+                document.forms["formTambahProduk"]["hargasatuan"].value = "";
+                document.forms["formTambahProduk"]["hargasatuan"].focus();
+                return false;
+            }
+            // Validasi grosir tidak boleh kosong, minimal pilih salah satu
+            let grosir = document.forms["formTambahProduk"]["grosir"];
+            if (!grosir[0].checked && !grosir[1].checked) {
+                alert("Silahkan pilih opsi grosir.");
+                return false;
+            } else if (grosir[0].checked) {
+                if (document.forms["formTambahProduk"]["hargagrosir"].value == "") {
+                    alert("Silahkan isi harga grosir.");
+                    document.forms["formTambahProduk"]["hargagrosir"].focus();
+                    return false;
+                }
+            }
+
+            // Validasi jasa kirim
+            let jasakirim = document.forms["formTambahProduk"]["jasakirim[]"];
+            let selectedCount = 0;
+
+            for (let i = 0; i < jasakirim.length; i++) {
+                if (jasakirim[i].checked) {
+                    selectedCount++;
+                }
+            }
+
+            if (selectedCount < 3) {
+                alert("Silahkan pilih minimal tiga jasa kirim.");
+                return false;
+            }
+
+            // Validasi teks captcha harus sesuai dengan captcha yang di-generate
+            let captchaInput = document.forms["formTambahProduk"]["captcha_input"].value;
+            if (captchaInput === "") {
+                alert("Silakan masukan captcha");
+                return false;
+            } else if (captchaInput !== captchaGenerate) {
+                alert("Masukkan captcha tidak sesuai.");
+                return false;
+            }
+
+            alert('Sukses! Terima kasih telah mengisi formulir.');
+            return true;
+        }
+
+        // Fungsi untuk mengisi elemen <select id="subkategori"> sesuai nilai province yang dipilih
+        function getSubKategori() {
+            let kategori = document.forms["formTambahProduk"]["kategori"].value;
+            let subkategori_select = document.getElementById("subkategori");
+
+            subkategori_select.innerHTML = "";
+            switch (kategori) {
+                case "Baju":
+                    subkategori_select.innerHTML =
+                        '<option value="">--Pilih sub kategori--</option>' +
+                        '<option value="Baju Pria">Baju Pria</option>' +
+                        '<option value="Baju Wanita">Baju Wanita</option>' +
+                        '<option value="Baju Anak">Baju Anak</option>';
+                    break;
+                case "Elektronik":
+                    subkategori_select.innerHTML =
+                        '<option value="">--Pilih sub kategori--</option>' +
+                        '<option value="Mesin Cuci">Mesin Cuci</option>' +
+                        '<option value="Kulkas">Kulkas</option>' +
+                        '<option value="AC">AC</option>';
+                    break;
+                case "Alat Tulis":
+                    subkategori_select.innerHTML =
+                        '<option value="">--Pilih sub kategori--</option>' +
+                        '<option value="Kertas">Kertas</option>' +
+                        '<option value="Map">Map</option>' +
+                        '<option value="Pulpen">Pulpen</option>';
+                    break;
+                default:
+                    subkategori_select.innerHTML =
+                        '<option value="">Pilih sub kategori</option>';
+                    break;
+            }
+        }
+
+        // Validasi opsi grosir
+        function pilihanGrosir() {
+            let grosirYa = document.getElementById("ya");
+            let inputHargaGrosir = document.getElementById("hargagrosir");
+
+            // Jika dipilih ya maka kolom harga grosir akan diaktifkan
+            if (grosirYa.checked) {
+                inputHargaGrosir.disabled = false;
+
+                if (inputHargaGrosir.value === "") {
+                    alert("Silakan masukkan harga grosir.");
+                    inputHargaGrosir.focus();
+                    return false;
+                } else if (isNaN(inputHargaGrosir.value)) {
+                    alert("Masukkan harga grosir harus berupa angka.");
+                    inputHargaGrosir.value = "";
+                    inputHargaGrosir.focus();
+                    return false;
+                }
+            } else {
+                inputHargaGrosir.disabled = true;
+                inputHargaGrosir.value = "";
+            }
+        }
+
+        function generateCaptcha() {
+            const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            let captchaGenerate = '';
+            for (let i = 0; i < 5; i++) {
+                captchaGenerate += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            document.querySelector('input[name="captcha_text"]').value = captchaGenerate;
+            return captchaGenerate;
+        }
+    </script>
+</head>
+
+<body onload="generateCaptcha()">
+    <h2>Form Tambah Produk</h2>
+    <form id="formTambahProduk" method="GET" autocomplete="on" action="" onsubmit="return validateForm()">
+        <table>
+            <tr>
+                <td><label for="name">Nama Produk</label></td>
+                <td><input type="text" name="name" id="name" size="30" /></td>
+            </tr>
+
+            <tr>
+                <td>Deskripsi</td>
+                <td><textarea name="deskripsi" rows="5" cols="30"></textarea></td>
+            </tr>
+
+            <tr>
+                <td><label for="kategori">Kategori</label></td>
+                <td><select name="kategori" id="kategori" onchange="getSubKategori()">
+                        <option value="">--Pilih Kategori--</option>
+                        <option value="Baju">Baju</option>
+                        <option value="Elektronik">Elektronik</option>
+                        <option value="Alat Tulis">Alat Tulis</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label for="subkategori">Sub Kategori</label></td>
+                <td><select name="subkategori" id="subkategori">
+                        <option value="">--Pilih Sub Kategori--</option>
+                        <option value="Baju">Baju</option>
+                        <option value="Elektronik">Elektronik</option>
+                        <option value="Alat Tulis">Alat Tulis</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label for="hargasatuan">Harga Satuan</label></td>
+                <td><input type="text" name="hargasatuan" id="hargasatuan" size="10"></td>
+            </tr>
+
+            <tr>
+                <td>Grosir</td>
+                <td>
+                    <input type="radio" name="grosir" id="ya" onchange="pilihanGrosir()">
+                    <label for="ya">Ya</label><br />
+                    <input type="radio" name="grosir" id="tidak" onchange="pilihanGrosir()">
+                    <label for="tidak">Tidak</label><br />
+                </td>
+            </tr>
+            <tr>
+                <td><label for="hargagrosir">Harga Grosir</label></td>
+                <td><input type="text" name="hargagrosir" id="hargagrosir" size="10"></td>
+            </tr>
+            <tr>
+                <td><label for="jasakirim">Jasa Kirim</label></td>
+                <td>
+                    <input type="checkbox" name="jasakirim[]" id="JNE" value="JNE">
+                    <label for="JNE">JNE</label><br />
+                    <input type="checkbox" name="jasakirim[]" id="TIKI" value="TIKI">
+                    <label for="TIKI">TIKI</label><br />
+                    <input type="checkbox" name="jasakirim[]" id="SiCepat" value="SiCepat">
+                    <label for="SiCepat">SiCepat</label><br />
+                    <input type="checkbox" name="jasakirim[]" id="NinjaExpress" value="NinjaExpress">
+                    <label for="NinjaExpress">NinjaExpress</label><br />
+                    <input type="checkbox" name="jasakirim[]" id="Wahana" value="Wahana">
+                    <label for="Wahana">Wahana</label><br />
+                </td>
+            </tr>
+            <tr>
+                <td><label for="captcha">Captcha</label></td>
+                <td>
+                    <input type="text" name="captcha_text" size="10" disabled>
+                    <input type="text" name="captcha_input" id="captcha_input" size="10">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><br><input type="submit" name="submit" value="Submit">&nbsp;
+                    <input type="reset" name="reset" value="Reset">
+            </tr>
+        </table>
+    </form>
+
+</body>
+
+</html>
