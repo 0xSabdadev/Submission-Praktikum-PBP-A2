@@ -83,8 +83,7 @@
 
                 <div class="form-group">
                     <label for="alamat">Alamat:</label><br />
-                    <textarea class="form-control" id="alamat" name="alamat" rows="2" cols="73"<?php if(isset($alamat)) {echo $alamat;} ?>>
-                    </textarea>
+                    <textarea class="form-control" id="alamat" name="alamat" rows="2" cols="73"><?php if(isset($alamat)) {echo $alamat;} ?></textarea>
                     <div class="error"><?php if(isset($error_alamat)) echo $error_alamat;?></div>
                 </div>
 
