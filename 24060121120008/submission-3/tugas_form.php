@@ -148,7 +148,7 @@
                             if(isset($_POST['ekskul'])){
                                 if(count($_POST['ekskul']) >= 1 && count($_POST['ekskul']) <= 3){
                                     echo '<h3>BERHASIL!!</h3><br />';
-                                    echo 'Your Input:<br />';
+                                    echo '<h5>Your Input:</h5><br />';
                                     echo 'NIS = '.$_POST['nis'].'<br />';
                                     echo 'Nama = '.$_POST['nama'].'<br />';
                                     echo 'Kelas = '.$_POST['kelas'].'<br />';
