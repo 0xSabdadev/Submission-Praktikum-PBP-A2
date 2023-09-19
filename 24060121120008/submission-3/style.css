@@ -1,0 +1,113 @@
+    /* Nama       : Tiara Fitra Ramadhani Siregar
+       Nim        : 24060121120008
+       Tanggal    : 17 September 2023
+       Lab        : PBP A2 */
+
+.satu{
+    width: 600px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    overflow: hidden; 
+    margin: auto;
+    margin-top: 50px;
+}
+
+.judul{
+    background-color: lightgrey;
+    width: 600px;
+    padding: 10px;
+    border: 0.5px solid #ccc;
+}
+
+*{
+    font-family: Montserrat-Regular,sans-serif;
+    font-size: 15px;
+}
+
+.form-group{
+    margin: 15px;
+}
+
+.jk{
+    margin: 15px;
+}
+
+.btn-primary {
+    background-color: #0000ff; 
+    color: #fff; 
+    border: none;
+    padding: 10px 20px;
+    margin-left: 15px;
+    border-radius: 5px; 
+    cursor: pointer;
+}
+
+.btn-danger {
+    background-color: #ff0000; 
+    color: #fff; 
+    border: none;
+    padding: 10px 20px;
+    margin-left: 8px;
+    border-radius: 5px; 
+    cursor: pointer;
+}
+
+select.form-control {
+    width: 570px;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 2px solid #ccc;
+    border-radius: 4px; 
+}
+
+input.form-control {
+    width: 570px;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 2px solid #ccc; 
+    border-radius: 4px;
+   
+}
+
+.form-check-input[type="radio"] {
+    margin-bottom: 10px;
+}
+
+.form-check-input[type="checkbox"] {
+    margin-bottom: 10px;
+}
+
+#alamat{
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.err{
+    color: red;
+}
+
+.yourinput{
+    background-color: rgb(255, 253, 253);
+    width: 570px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    overflow: hidden; 
+    margin: auto;
+    margin-top: 20px;
+    padding: 15px;
+}
+
+h3{
+    color: rgb(25, 222, 87);
+    font-size: 20px;
+    margin-bottom: 0px;
+    margin-top: 2px;
+    text-align: center;
+}
+
+h5{
+    margin-bottom: 2px;
+    margin-top: 0px;
+
+}
