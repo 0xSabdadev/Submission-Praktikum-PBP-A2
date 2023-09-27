@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello World</title>
+</head>
+<body>
+    <?php
+        $nilai = 1000;
+        echo '<table border = "1">';
+        echo '<tr>
+                <td>No</td>
+                <td>Diskon</td>
+                <td>Harga Setelah Diskon</td>
+              </tr>';
+        
+        $i = 1;
+        do {
+            echo '<tr>';
+            echo '<td>'.$i.'</td>';
+            $diskon = $i*0.1;
+            echo '<td>'.($diskon*100).'%</td>';
+            $harga = 100000;
+            $harga_diskon = $harga - ($harga * $diskon);
+            echo '<td>'.$harga_diskon.'</td>';
+            echo '</tr>';
+            $i++;
+        } while ($i <= 10);
+        echo '</table>';
+    ?>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Form Tambah Data Produk</title>
+        <script>
+            function validateForm() {
+                var lengthValid = validateLength();
+                var jasaKirim = validateJasaKirim();
+                var captchaValid = validateCaptcha();
+                if (lengthValid && jasaKirim && captchaValid) {
+                    return true;
+                } else {
+                    return false;
+                }
+
+            }
+
+            function validateLength() {
+                var namaProduk = document.getElementById("NamaProduk").value;
+                var deskripsi = document.getElementById("deskripsi").value;
+
+                if (namaProduk.length < 5 || namaProduk.length > 30) {
+                    alert("Nama produk harus memiliki 5 hingga 30 karakter!");
+                    return false;
+                }
+                if (deskripsi.length < 5 || deskripsi.length > 100) {
+                    alert("deskripsi harus memiliki 5 hingga 100 karakter!");
+                    return false;
+                }
+                if (kategori = "Baju") {
+                    return document.getElementById
+                }
+                return true;
+            }
+                function validateJasaKirim() {
+                var checkboxes = document.getElementsByName("JasaKirim");
+                var checkedCount = 0;
+                
+                for (var i = 0; i < checkboxes.length; i++) {
+                    if (checkboxes[i].checked) {
+                        checkedCount++;
+                    }
+                }
+                
+                if (checkedCount >= 3) {
+                    return true;
+                } else {
+                    alert("Pilih setidaknya 3 jasa kirim.");
+                    return false;
+                }
+            }
+
+            function updateSubkategori() {
+                var kategoriSelect = document.getElementById("kategori");
+                var subkategoriSelect = document.getElementById("subkategori");
+                var kategoriGroup = subkategoriSelect.getElementsByClassName("kategori-group");
+
+                var selectedKategori = kategoriSelect.value;
+
+                for (var i = 0; i < kategoriGroup.length; i++) {
+                    kategoriGroup[i].hidden = true;
+                }
+
+                var selectedGroup = subkategoriSelect.querySelector('optgroup[label="' + selectedKategori + '"]');
+                if (selectedGroup) {
+                    selectedGroup.hidden = false;
+                        }
+            }
+            
+
+            function updateHargaGrosir() {
+                var yaGrosirSelect = document.getElementById("ya");
+                var tidakGrosirSelect = document.getElementById("tidak");
+                var hargaGrosir = document.getElementById("hargaGrosir");
+                if (yaGrosirSelect.checked) {
+                    return hargaGrosir.removeAttribute("disabled");
+                }else if (tidakGrosirSelect.checked){
+                    hargaGrosir.value = "";
+                    return hargaGrosir.setAttribute("disabled", true);
+                    
+                }
+            }
+            function generateRandomChar() {
+                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+                const randomIndex = Math.floor(Math.random() * characters.length);
+                return characters.charAt(randomIndex);
+            }
+
+            function generateCaptcha() {
+                let captcha = '';
+                for (let i = 0; i < 5; i++) {
+                    captcha += generateRandomChar();
+                }
+                var textCaptcha = document.getElementById('randomCaptcha');
+                textCaptcha.value = captcha;
+            }
+            function validateCaptcha() {
+                const rcaptcha = document.getElementById("randomCaptcha").value;
+                const icaptcha = document.getElementById("inputCaptcha").value;
+
+                if (rcaptcha === icaptcha) {
+                    return true;
+                }else {
+                    alert("captcha salah!");
+                    generateCaptcha();
+                    return false;
+                }
+            }
+
+            window.onload = generateCaptcha;
+        </script>
+    </head>
+    <body>  
+        <form onsubmit="return validateForm()">
+            <table style="border: 1px solid;">
+                <tr>
+                    <td colspan="2">
+                        <h2 style="text-align: center;">Form Tambah Data Produk</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Nama Produk
+                    </td>
+                    <td>
+                        <input type="text" name="NamaProduk" id="NamaProduk" style="width: 5cm;" required>
+                    </td>                 
+                </tr>
+                <tr>
+                    <td>
+                        Deskripsi
+                    </td>
+                    <td>
+                        <textarea id="deskripsi" name="deskripsi" rows="4" cols="30" required></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Kategori 
+                    </td>
+                    <td>
+                        <select name="kategori" id="kategori" required onchange="updateSubkategori()">
+                            <option value="" id="none" selected disabled hidden>--Pilih Kategori--</option>
+                            <option value="Baju">Baju</option>
+                            <option value="Elektronik">Elektronik</option>
+                            <option value="Alat Tulis">Alat Tulis</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Sub Kategori 
+                    </td>
+                    <td>
+                        <select id="subkategori" required>
+                            <option value="" id="nonesub" selected disabled hidden>--Pilih Sub Kategori--</option>
+                            <optgroup label="Baju" class="kategori-group">
+                                <option value="Baju Pria">Baju Pria</option>
+                                <option value="Baju Wanita">Baju Wanita</option>
+                                <option value="Baju Anak">Baju Anak</option>
+                            </optgroup>
+                            <optgroup label="Elektronik" class="kategori-group">
+                                <option value="Mesin Cuci">Mesin Cuci</option>
+                                <option value="Kulkas">Kulkas</option>
+                                <option value="AC">AC</option>
+                            </optgroup>
+                            <optgroup label="Alat Tulis" class="kategori-group">
+                                <option value="Kertas">Kertas</option>
+                                <option value="Map">Map</option>
+                                <option value="Pulpen">Pulpen</option>
+                            </optgroup>
+                        </select>  
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Harga Satuan 
+                    </td>
+                    <td>
+                        <input type="number" id="hargaSatuan" style="width: 2.5cm;">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Grosir 
+                    </td>
+                    <td>
+                        <input type="radio" name="grosir" id="ya" required onchange="updateHargaGrosir()"> Ya
+                        <br>
+                        <input type="radio" name="grosir" id="tidak" onchange="updateHargaGrosir()"> Tidak
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Harga Grosir 
+                    </td>
+                    <td>
+                        <input type="number" name="Harga Grosir" id="hargaGrosir" style="width: 2.5cm;" required disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Jasa Kirim
+                    </td>
+                    <td>
+                        <input type="checkbox" name="JasaKirim" id="JNE"> JNE <br>
+                        <input type="checkbox" name="JasaKirim" id="TIKI"> TIKI <br>
+                        <input type="checkbox" name="JasaKirim" id="SiCepat"> SiCepat <br>
+                        <input type="checkbox" name="JasaKirim" id="NinjaExpress"> Ninja Express <br>
+                        <input type="checkbox" name="JasaKirim" id="Wahana"> Wahana <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Captcha 
+                    </td>
+                    <td>
+                        <input type="text" name="captcha" id="randomCaptcha" disabled style="width: 2.3cm;"> 
+                        <input type="text" name="" id="inputCaptcha" style="width: 2.3cm;" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="submit">
+                        <input type="reset" value="reset">   
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
