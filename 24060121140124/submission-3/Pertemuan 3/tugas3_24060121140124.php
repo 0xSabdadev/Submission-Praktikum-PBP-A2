@@ -194,6 +194,27 @@
                 <button type="submit" class="btn btn-primary" name="submit" value="submit">Submit</button>
                 <button type="reset" class="btn btn-danger">Reset</button>
             </form>
+
+            <?php
+            if (isset($_POST["submit"])) {
+                echo "<h3>Your Input</h3>";
+                echo "NIS = " . $_POST['NIS'] . "<br />";
+                echo "Nama = " . $_POST['nama'] . "<br />";
+                echo "Jenis Kelamin = " . $_POST['jenis_kelamin'] . "<br />";
+                echo "Kelas = " . $_POST['kelas'] . "<br />";
+
+                $ekstrakurikuler = $_POST['ekstrakurikuler'];
+                if (!empty($ekstrakurikuler)) {
+                    echo 'Ekstrakurikuler yang dipilih: ';
+                    echo '<ul>';
+                    foreach ($ekstrakurikuler as $ekstrakurikuler_item) {
+                        echo '<li>' . $ekstrakurikuler_item . '</li>';
+                    }
+                    echo '</ul>';
+                }
+            }
+            ?>
+
         </div>
     </div>
 </body>
