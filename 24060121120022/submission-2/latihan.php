@@ -1,3 +1,10 @@
+<!--
+    Nama Pembuat    : Aprilyanto Setiyawan Siburian
+    NIM             : 24060121120022
+    Lab             : A2 PBP
+    Deskripsi       : Latihan modul pertemuan 2 SINTAKS DASAR PHP
+-->
+
 <?php  
     $array_mhs = array('Abdul' => array(89,90,54),
                         'Budi' => array(78,60,64),
