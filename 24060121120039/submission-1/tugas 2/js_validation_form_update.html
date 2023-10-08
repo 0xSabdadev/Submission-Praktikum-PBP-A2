@@ -1,0 +1,195 @@
+<!-- Nama : Nida' Naafilatul Haniifah -->
+<!-- Nim : 24060121120039 -->
+<!-- progress tanggal 04/10/2023 : ini file paling terupdate -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+</head>
+<body>
+    <h1>Form Tambah Data Produk</h1>
+    <table>
+        <form action="" 
+        name="formBarang"
+        id="formBarang"
+        onsubmit="return validation()">
+            <tr>
+                <td>Nama Produk</td>
+                <td><input type="text" name="productName" id="productName" size="30"></td>
+            </tr>
+            <tr>
+                <td>Deskripsi</td>
+                <td><textarea name="description" id="description" cols="30" rows="5"></textarea></td>
+            </tr>
+            <tr>
+                <td><label for="kategori">Kategori</label></td>
+                <td>
+                    <select name="category" id="category" onchange="getKategori()">
+                        <option value="">--Pilih Kategori--</option>
+                        <option value="Baju">Baju</option>
+                        <option value="Elektronik">Elektronik</option>
+                        <option value="Alat Tulis">Alat Tulis</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="subKategori">Sub Kategori</label></td>
+                <td>
+                    <select name="subCategory" id="subCategory">
+                        <option value="">--Pilih Sub Kategori--</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Harga Satuan</td>
+                <td>
+                    <input type="number" name="hargaSatuan" id="hargaSatuan" >
+                </td>
+            </tr>
+            
+            <tr>
+                <td><label for="grosir">Grosir</label></td>
+                <td>
+                    <input type="radio" name="grosir" id="Ya" value="Ya">
+                    <label for="Ya">Ya</label><br>
+                    <input type="radio" name="grosir" id="Tidak" value="Tidak">
+                    <label for="Ya">Tidak</label>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Harga Grosir</td>
+                <td>
+                    <input type="number" name="hargaGrosir" id="hargaGrosir" >
+                </td>
+            </tr>
+
+            <tr>
+                <td>Jasa Kirim</td>
+                <td>
+                    <input type="checkbox" name="jaskir" id="jaskir" value="JNE">
+                    <label for="JNE">JNE</label> <br>
+                    <input type="checkbox" name="jaskir" id="jaskir" value="TIKI">
+                    <label for="TIKI">TIKI</label> <br>
+                    <input type="checkbox" name="jaskir" id="jaskir" value="SiCepat">
+                    <label for="SiCepat">SiCepat</label> <br>
+                    <input type="checkbox" name="jaskir" id="jaskir" value="Ninja Express">
+                    <label for="NinjaExpress">Ninja Express</label> <br>
+                    <input type="checkbox" name="jaskir" id="jaskir" value="Wahana">
+                    <label for="wahan">Wahana</label> <br>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Captcha</td>
+                <td>
+                    <input type="text" name="captcha" id="captcha" disabled>
+                    <input type="text" name="captchaValue" id="captchaValue">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" name="Submit" id="Submit" value="Submit">
+                    <input type="reset" name="Reset" id="Reset" value="Reset">
+                </td>
+                
+            </tr>
+        </form>
+
+    </table>
+    <script>
+        function validation(){
+            const namaProduk = document.forms["formBarang"]["productName"].value
+
+            if (namaProduk == ""){
+                alert("nama produk tidak boleh kosong");
+                return false;
+            }else if (namaProduk.length < 5){
+                alert("nama produk minimal 5 karakter");
+                return false;
+            }else if(namaProduk.length > 30){
+                alert("nama produk maksimal 30 karakter")
+                return false;
+            }
+
+            const deskripsi = document.forms["formBarang"]["description"].value
+            if (deskripsi == ""){
+                alert("deskripsi tidak boleh kosong");
+                return false;
+            }else if (deskripsi.length < 5){
+                alert("deskripsi minimal 5 karakter");
+                return false;
+            }else if(deskripsi.length > 100){
+                alert("deskripsi maksimal 100 karakter");
+                return false;
+            }
+
+            const kategori = document.forms["formBarang"]["category"].value
+            if(kategori == ""){
+                alert("Kategori harus diisi");
+                return false;
+            }
+
+            const subKategori = document.getElementById("subCategory").value;
+            if(subKategori == ""){
+                alert("Sub Kategori harus diisi");
+                return false;
+            }
+
+            const grosir = document.forms["formBarang"]["grosir"].value;
+            if(grosir == ""){
+                alert("Harus memilih grosir atau tidak")
+                return false;
+            }
+
+            const hargaGrosir = document.forms["formBarang"]["hargaGrosir"].value;
+            if(grosir == "Ya"){
+                if(hargaGrosir == ""){
+                    alert("Tolong isi Harga Grosir.");
+                    return false;
+                }  
+            }
+            var jaskir= document.forms['formBarang']['jaskir'];
+            var numChecked = 0;
+
+            for (var i = 0; i < jaskir.length; i++){
+                if (jaskir[i].type == "checkbox" && jaskir[i].checked) {
+                    numChecked ++;
+                }
+            }
+
+            if (numChecked < 3){
+                alert ("Minimal pilih 3");
+                return false;
+            }
+        }
+
+        function getKategori(){
+            const kategori = document.forms["formBarang"]["category"].value;
+
+            if (kategori == "Baju"){
+                document.getElementById("subCategory").innerHTML = 
+                '<option value="" disabled>--Pilih SubKategori--</option>' + 
+                '<option value="Baju Pria">Baju Pria</option>' +
+                '<option value="Baju Wanita">Baju Wanita</option>' +
+                '<option value="Baju Anak">Baju Anak</option>';
+            }else if(kategori == "Elektronik"){
+                document.getElementById("subCategory").innerHTML = 
+                '<option value="" disabled>--Pilih SubKategori--</option>' + 
+                '<option value="Mesin Cuci">Mesin Cuci</option>' +
+                '<option value="Kulkas">Kulkas</option>' +
+                '<option value="AC">AC</option>';
+            }else if(kategori == "Alat Tulis"){
+                document.getElementById("subCategory").innerHTML = 
+                '<option value="" disabled>--Pilih SubKategori--</option>' + 
+                '<option value="Kertas">Kertas</option>' +
+                '<option value="Map">Map</option>' +
+                '<option value="Pulpen">Pulpen</option>';
+            }
+        }
+    </script>
+</body>
+</html>
