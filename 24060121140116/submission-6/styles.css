@@ -1,0 +1,13 @@
+body {
+    background-image: url('fsm.jpg'); 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+}
+/* styles.css */
+
+.card {
+    background-color: rgba(255, 255, 255, 0.8); 
+    border: none; 
+    box-shadow: none; 
+}
