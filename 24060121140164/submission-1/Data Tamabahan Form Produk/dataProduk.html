@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Form Data Penambahan Produk</title>
+</head>
+
+<body onload="generateCaptcha()">
+    <div id="container">
+        <h1>Form Tambah Data Produk</h1>
+        <form name="formTambahDataProduk" onsubmit="return validateForm" method="get">
+            <div>
+                <label for="fnProduk">Nama Produk</label>
+                <input type="text" name="fnProduk" id="fnProduk" required="required" minlength="5" maxlength="30"/>
+                <br />
+            </div>
+            <div>
+                <label for="fnDeskripsi" style="vertical-align: middle;">Deskripsi</label>
+                <textarea name="fnDeskripsi" id="fnDeskripsi" rows="5" cols="50" required="required" minlength="5" maxlength="100"></textarea>
+                <br />
+            </div>
+            <div>
+                <label for="fnKategori">Kategori</label>
+                <select name="fnKategori" id="fnKategori" onchange="select_subKategory()">
+                    <option value="" selected disabled>--Pilih Kategori--</option>
+                    <option value="Baju">Baju</option>
+                    <option value="Elektronik">Elektronik</option>
+                    <option value="Alat Tulis">Alat Tulis</option>
+                </select>
+                <br />
+            </div>
+            <div>
+                <label for="fnSubKategori">Sub Kategori</label>
+                <select name="fnSubKategori" id="fnSubKategori">
+                <option value="" Selected>--Pilih Sub Kategori--</option><br />
+                </select>
+                <br />
+            </div>
+            <div>
+                <label for="fnHargaSatuan">Harga Satuan</label>
+                <input type="text" name="fnHargaSatuan" id="fnHargaSatuan" required="required" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                <br />
+            </div>
+            <div>
+                <label for="fnGrosir" style="vertical-align: middle;">Grosir</label>
+                <input type="radio" name="fnGrosir" id="fnGrosirYes" Value="Ya" onchange="checkedGrosir()">Ya<br />
+                <input type="radio" name="fnGrosir" id="fnGrosirNo" value="Tidak" onchange="checkedGrosir()">Tidak
+            </div>
+            <div>
+                <label for="fnHargaGrosir">Harga Grosir</label>
+                <input type="text" name="fnHargaGrosir" id="fnHargaGrosir" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+            </div>
+            <div>
+                <label for="jasaKirim[]" style="vertical-align: middle;">Jasa Kirim</label>
+                <input type="checkbox" name="jasaKirim[]" id="jasaKirim[]" value="JNE">JNE<br />
+                <input type="checkbox" name="jasaKirim[]" id="jasaKirim[]" value="TIKI">TIKI<br />
+                <input type="checkbox" name="jasaKirim[]" id="jasaKirim[]" value="SiCepat">SiCepat<br />
+                <input type="checkbox" name="jasaKirim[]" id="jasaKirim[]" value="Ninja Express">Ninja Express<br />
+                <input type="checkbox" name="jasaKirim[]" id="jasaKirim[]" value="Wahana">Wahana
+            </div>
+            <div>
+                <label for="fnCaptcha">Captcha</label>
+                <input type="text" name="captchaText" size="10" disabled>
+                <input type="text" name="captchaInput" id="captchaInput" size="10">
+            </div>
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset">
+        </form>
+    </div>
+    <script src="script.js" charset="UTF-8"></script>  
+</body>
+</html>
